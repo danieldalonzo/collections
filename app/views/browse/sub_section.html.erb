@@ -9,7 +9,7 @@
       <ul>
         <% sub_section_artefacts.each do |sub_section_artefact| %>
           <li>
-            <%= link_to sub_section_artefact.title, sub_section_artefact.web_url %>
+            <%= link_to sub_section_artefact.title, "https://www.gov.uk#{sub_section_artefact.web_url}" %>
           </li>
         <% end %>
       </ul>
