@@ -1,0 +1,55 @@
+<% content_for :page_class, "specialist-sector-browse" %>
+<div class="header-context group">
+  <!-- deliberately empty to skip breadcrumbs -->
+</div>
+
+<header class="page-header group">
+  <div class="full-width">
+    <div class="heading">
+      <h1><%= yield :page_title %></h1>
+    </div>
+    <div class="latest-subscribe">
+      <ul>
+        <% if local_assigns[:link_to_latest_feed] %>
+          <li class="primary">
+            <%= link_to "All topics in #{subcategory.parent_sector_title}", sector_path(subcategory.parent_slug) %>
+          </li>
+          <li><%= link_to "Latest changes to #{subcategory.title}", latest_changes_path(sector: params[:sector], subcategory: params[:subcategory]) %></li>
+        <% else %>
+          <li class="primary"><%= link_to subcategory.title, sector_path(subcategory.slug) %></li>
+        <% end %>
+        <li class="email">
+          <%= link_to email_signup_path(subtopic: subcategory.slug) do %>
+          Subscribe to email alerts
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<% if local_assigns[:beta_label] %>
+  <%= render partial: 'govuk_component/beta_label',
+             locals: {
+               message: "This part of #{link_to('GOV.UK', '/')} is new and being improved - #{link_to('find out what this means','/help/beta')}"
+             } %>
+<% end %>
+
+<div class="browse-container full-width">
+  <% if subcategory.description.present? %>
+    <div class="category-description">
+      <p><%= subcategory.description %></p>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+  <%= render partial: 'govuk_component/document_footer',
+             locals: {
+               published: Time.now.strftime('%-d %B %Y'),
+               from: organisations.array_of_links,
+               part_of: subcategory.part_of_links(
+                 include_child: !local_assigns[:link_to_latest_feed]
+               )
+             } %>
+</div>

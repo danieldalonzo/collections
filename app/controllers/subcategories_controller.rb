@@ -50,6 +50,17 @@ private
   end
   helper_method :changed_documents_pagination
 
+  def subcategory_layout
+    use_alternative_layout? ? "subcategory_alternative" : "subcategory"
+  end
+  helper_method :subcategory_layout
+
+  def use_alternative_layout?
+    %w{
+      oil-and-gas/fields-and-wells
+    }.include?(subcategory.slug)
+  end
+
   def send_404_if_not_found
     error_404 unless subcategory.present?
   end
