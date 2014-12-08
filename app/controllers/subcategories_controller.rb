@@ -31,7 +31,9 @@ class SubcategoriesController < ApplicationController
 private
 
   def subcategory
-    @subcategory ||= Subcategory.find(slug, pagination_params)
+    @subcategory ||= SubcategoryPresenter.new(
+      Subcategory.find(slug, pagination_params)
+    )
   end
   helper_method :subcategory
 
