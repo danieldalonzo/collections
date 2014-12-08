@@ -11,7 +11,7 @@
 
       h1 {
         @include bold-48;
-        padding: 20px 0;
+        padding: 20px 0 50px;
 
         @include media(mobile) {
           width: auto;
@@ -37,11 +37,12 @@
         position: relative;
         @include core-14;
         @extend %contain-floats;
+        padding-top: 15px;
         padding-bottom: $gutter;
 
         @include media(tablet){
           float: left;
-          width: $two-thirds;
+          width: 100%;
         }
 
         dt {
@@ -75,7 +76,7 @@
           width: $one-third;
         }
 
-        @include core-14;
+        @include core-16;
 
         ul {
           @include media(tablet){
@@ -85,11 +86,12 @@
 
           li {
             display: block;
+            margin: 8px 0;
 
             &.primary {
               border-bottom: 1px solid $border-colour;
               padding-bottom: 10px;
-              margin-bottom: 14px;
+              margin: 0 0 14px;
             }
 
             &.email a {
